@@ -3,36 +3,36 @@ using namespace std;
 
 #define SAVINGS 0
 #define STUDENT 1
-#define LOAN 2
-#define FIXED 3
+#define FIXED 2
+#define LOAN 3
 
 #define PENDING 102
-#define APPROVED 200
-#define NOTAPPROVED 400
+#define INVALID 400
 #define NOTREQUESTED -1
 
+
 class Account {
-    int balance, loan;
+    double balance, loan;
     string username; //use this in the request stack
     int type;
-    int time;
+    // int time;
     int loanRequestStatus, loanRequestAmount=0;
     bool loggedIn;
+    //have to also include interest rate
 public:
-    Account(string username, int type, int amount) {
-        if (type==LOAN) {
-            this->balance = 0;
-            this->loan = amount;
-        } else {
-            this->balance = amount;
-            this->loan = 0;
-        }
+    Account(string username, int type, double amount) { 
+        this->loan = 0;
+        this->balance = amount;
         this->username = username;
         this->type = type;
-        this->time = 0;
+        // this->time = 0;
         this->loanRequestStatus = NOTREQUESTED;
         this->loanRequestAmount = 0;
         this->loggedIn = true;
+
+        if (type==LOAN) {
+            this->loan = amount;
+        }
 
         cout << this->getTypeName() << " account for ";
         cout << this->username << " created; ";
@@ -40,11 +40,11 @@ public:
     }
 
     //getters and setters start
-    void setBalance(int balance) {
+    void setBalance(double balance) {
         this->balance = balance;
     }
 
-    int getBalance() {
+    double getBalance() {
         return this->balance;
     }
 
@@ -71,85 +71,111 @@ public:
         else return "Fixed deposit";
     }
 
-    int getTime() {
-        return this->time;
-    }
+    // int getTime() {
+    //     return this->time;
+    // }
 
-    int getLoan() {
+    double getLoan() {
         return this->loan;
     }
 
+    int getloanRequestStatus() {
+        return loanRequestStatus;
+    }
+
+    void setLoanRequestStatus(int status) {
+        loanRequestStatus = status;
+    }
+
+    void setLoanRequestAmount(int amount) {
+        loanRequestAmount = amount;
+    }
+
+    double getloanRequestAmount() {
+        return loanRequestAmount;
+    }
+
     //increase or decrease methods
-    void IncreaseBalance(int amount) {
+    void IncreaseBalance(double amount) {
         balance += amount;
     }
 
-    void DecreaseBalance(int amount) {
+    void DecreaseBalance(double amount) {
         balance -= amount;
     }
 
-    void IncreaseLoan(int amount) {
+    void IncreaseLoan(double amount) {
         loan += amount;
     }
 
-    void DecreaseLoan(int amount) {
+    void DecreaseLoan(double amount) {
         loan -= amount;
     }
 
-    void IncreaseTime() {
-        this->time = 1 + this->time; 
-        //have to adjust loans 
-        //assuming loan amount bere jabe
-        this->loan += ((this->loan)/10);
+    void Login() {
+        loggedIn = true;
     }
+
+    void Logout() {
+        loggedIn = false;
+        cout << "Transaction for " << username << "closed\n";
+    }
+
+    // void IncreaseTime() {
+    //     this->time = 1 + this->time; 
+    //     //have to adjust loans 
+    //     //assuming loan amount bere jabe
+    //     this->loan += ((this->loan)/10);
+    // }
 
     //required methods
     void Query(); //Hopefully Done
-    void RequestLoan(int); 
-    void Withdraw(int); //Hopefully Done
-    void Deposit(int); //Hopefully Done
+    void RequestLoan(double); 
+    void Withdraw(double, int); //Hopefully Done
+    void Deposit(double); //Hopefully Done
 };
 
 void Account::Query() {
-    cout << "Current Balance " << this->getBalance();
-    cout << "$, loan" << this->getLoan() << "$\n";
+    cout << "Current Balance " << balance;
+    cout << "$, loan" << loan << "$\n";
 }
 
-void Account::Deposit(int amount) {
-    if (this->getType() == FIXED) {
+void Account::Deposit(double amount) {
+    if (type == FIXED) {
         if (amount < 50000) {
             cout << "Invalid request\n";
             return;
         }
     } 
         
-    if (this->getType() == LOAN) {
+    if (type == LOAN) {
         this->DecreaseLoan(amount);
     } else {
         this->IncreaseBalance(amount);
     }
 }
 
-void Account::Withdraw(int amount) {
+void Account::Withdraw(double amount, int time) {
     bool INVALIDREQUEST = false;
-    if (this->getBalance() < amount) {
+
+    if (balance < amount) {
         INVALIDREQUEST = true;
-    } else if (this->getType() == STUDENT) {
+    } else if (type == STUDENT) {
         //cannot withdraw more than 10000 in one transaction
         if (amount > 10000) {
             INVALIDREQUEST = true;
         }
-    } else if (this->getType() == SAVINGS) {
+    } else if (type == SAVINGS) {
         //cannot withdraw if the withdrawal results in a deposit of less than 1000
-        if (this->getBalance()-amount < 1000) {
+        if (balance-amount < 1000) {
             INVALIDREQUEST = true;
         }
-    } else if (this->getType() == LOAN) {
+    } else if (type == LOAN) {
         //cannot withdraw any amount
         INVALIDREQUEST = true;
-    } else if (this->getType() == FIXED) {
+    } else if (type == FIXED) {
         //cannot withdraw if it has not reached a maturity period of one year
-        if (this->getTime() < 1) {
+        if (time < 1) {
             INVALIDREQUEST = true; 
         }
     }
@@ -161,42 +187,34 @@ void Account::Withdraw(int amount) {
     }
 }
 
-void Account::RequestLoan(int amount) {
+void Account::RequestLoan(double amount) {
     //create a loan request stack ///////////////
     //and handle them from MD
     bool INVALIDREQUEST = false;
 
-    if (this->getType() == STUDENT) {
+    if (type == STUDENT) {
         if (amount > 1000) {
             INVALIDREQUEST = true;
         }
-    } else if (this->getType() == SAVINGS) {
+    } else if (type == SAVINGS) {
         if (amount > 10000) {
             INVALIDREQUEST = true;
         }
-    } else if (this->getType() == FIXED) {
+    } else if (type == FIXED) {
         if (amount > 100000) {
             INVALIDREQUEST = true;
         }
     } else {
-        //
-        int ln = (this->getLoan())/20;
-        if (amount>ln) {
+        if (amount != (loan * 0.05)) {
             INVALIDREQUEST = true;
         }
     }
 
     if (INVALIDREQUEST) {
         cout << "Invalid request\n";
+        this->loanRequestStatus = INVALID;
     } else {
         this->loanRequestStatus = PENDING;
         this->loanRequestAmount = amount;   
-    }
-
-    
-}
-
-
-int main() {
-    return 0;
+    }    
 }
