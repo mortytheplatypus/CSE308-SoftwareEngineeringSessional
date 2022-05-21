@@ -20,6 +20,9 @@ class Account {
     bool loggedIn;
     //have to also include interest rate
 public:
+    Account() {
+        //
+    }
     Account(string username, int type, double amount) { 
         this->loan = 0;
         this->balance = amount;
@@ -112,11 +115,11 @@ public:
         loan -= amount;
     }
 
-    void Login() {
+    void MakeActive() {
         loggedIn = true;
     }
 
-    void Logout() {
+    void MakeInactive() {
         loggedIn = false;
         cout << "Transaction for " << username << "closed\n";
     }
@@ -137,13 +140,14 @@ public:
 
 void Account::Query() {
     cout << "Current Balance " << balance;
-    cout << "$, loan" << loan << "$\n";
+    cout << "$, loan " << loan << "$\n";
 }
 
 void Account::Deposit(double amount) {
     if (type == FIXED) {
         if (amount < 50000) {
-            cout << "Invalid request\n";
+            cout << "Invalid request; current balance ";
+            cout << balance << "$, loan " << loan << "$\n";
             return;
         }
     } 
@@ -153,6 +157,9 @@ void Account::Deposit(double amount) {
     } else {
         this->IncreaseBalance(amount);
     }
+
+    cout << amount << " deposited; current balance ";
+    cout << balance << "$, loan " << loan << "$\n";
 }
 
 void Account::Withdraw(double amount, int time) {
@@ -181,9 +188,12 @@ void Account::Withdraw(double amount, int time) {
     }
 
     if (INVALIDREQUEST) {
-        cout << "Invalid request\n";
+        cout << "Invalid request; current balance ";
+        cout << balance << "$, loan " << loan << "$\n";
     } else {
         this->DecreaseBalance(amount);
+        cout << "Withdraw successful; current balance ";
+        cout << balance << "$, loan " << loan << "$\n";
     }
 }
 
@@ -211,10 +221,12 @@ void Account::RequestLoan(double amount) {
     }
 
     if (INVALIDREQUEST) {
-        cout << "Invalid request\n";
+        cout << "Invalid request; current balance ";
+        cout << balance << "$, loan " << loan << "$\n";
         this->loanRequestStatus = INVALID;
     } else {
         this->loanRequestStatus = PENDING;
         this->loanRequestAmount = amount;   
+        cout << "Loan request successful, sent for approval\n";
     }    
 }

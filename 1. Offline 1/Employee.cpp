@@ -6,16 +6,17 @@ using namespace std;
 #define OFFICER -2
 #define CASHIER -3
 
-//Loan niye jhamela ache 
+//who is active, eita niye jhamela ache
+//Loan niye jhamela ache - probably done
 class Employee: public Bank {
     string name;
     int employeeType;
-    static int employeeNo; //S1, S2 eishob implement kora baki
     bool loggedIn;
 public:
     //
     Employee() {
-        employeeNo = 1;
+        // employeeNo = 1;
+        employeeType = MD;
     }
 
     void Lookup(string);

@@ -2,6 +2,10 @@
 #include "Account.cpp"
 using namespace std;
 
+#define ACCOUNT 23
+#define EMPLOYEE 24
+#define NOONE 25
+
 vector<double> interestRates{0.1, 0.05, 0.15};
 class Bank {
     int MD, officer[2], cashiers[5];
@@ -9,6 +13,7 @@ class Bank {
     stack<Account> LoanRequests;
     int yearOfOperation;
     double internalFund;
+    
 public:
     Bank() {
         cout << "Bank Created; MD, S1, S2, ";
@@ -28,8 +33,6 @@ public:
 
     void increaseTime() {
         yearOfOperation++;
-        //adjust loans and their interests 
-        int n = accounts.size();
 
         //decrease loan
         for (Account account : accounts) {
@@ -37,6 +40,15 @@ public:
             account.IncreaseBalance(account.getBalance()*interestRates[account.getType()]);
             account.DecreaseBalance(500 < account.getBalance() ? 500 : account.getBalance());
         }
+    }
+
+    int CheckIfAccountExists(string username) {
+        for (Account account : accounts) {
+            if (account.getUsername() == username) {
+                return ACCOUNT;
+            }
+        }
+        return EMPLOYEE;
     }
 
     void addAccount(Account account) {
@@ -53,5 +65,30 @@ public:
 
     vector<Account> getAccounts() {
         return accounts;
+    }
+
+    int getTime() {
+        return yearOfOperation;
+    }
+
+
+    Account AccountLogin(string username) {
+        Account account;
+        for (Account account : accounts) {
+            if (account.getUsername() == username) {
+                account.MakeActive();
+                return account;
+            }
+        }
+        return account;
+        // whoIsActiveStatus = ACCOUNT;
+    }
+
+    void AccountLogout(string username) {
+        for (Account account : accounts) {
+            if (account.getUsername() == username) {
+                account.MakeInactive();
+            }
+        }
     }
 };
