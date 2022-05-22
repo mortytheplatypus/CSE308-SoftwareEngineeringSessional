@@ -19,8 +19,15 @@ public class Main {
             String line = scanner.nextLine();
             String[] command = line.split(" ");
 
-            if (whoIsActiveStatus == NOONE) {
+            if (command[0].equalsIgnoreCase("EXIT")) {
+                break;
+            } if (whoIsActiveStatus == NOONE) {
                 if (command[0].equalsIgnoreCase("Create")) {
+                    if (command.length != 4) {
+                        System.out.println("Bad request!");
+                        continue;
+                    }
+
                     if (command[2].equalsIgnoreCase("Savings")) {
                         account = new SavingsAccount(command[1], command[2], Double.parseDouble(command[3]));
                     } else if (command[2].equalsIgnoreCase("Student")) {
@@ -34,6 +41,11 @@ public class Main {
                     bank.AddAccount(account);
                     whoIsActiveStatus = ACCOUNT;
                 } else if (command[0].equalsIgnoreCase("Open")) {
+                    if (command.length != 2) {
+                        System.out.println("Bad request!");
+                        continue;
+                    }
+
                     if (command[1].equalsIgnoreCase("MD")) {
                         System.out.print(command[1] + " active");
                         if (bank.CheckIfLoanRequestsPending()) {
@@ -64,13 +76,23 @@ public class Main {
                     System.out.println();
                 } else if (command[0].equalsIgnoreCase("INC")) {
                     bank.IncreaseYear();
+                } else {
+                    System.out.println("Please correct you mistyping!");
                 }
             } else if (whoIsActiveStatus == ACCOUNT) {
                 if (command[0].equalsIgnoreCase("Query")) {
                     account.Query();
                 } else if (command[0].equalsIgnoreCase("Withdraw")) {
+                    if (command.length != 2) {
+                        System.out.println("Bad request!");
+                        continue;
+                    }
                     account.Withdraw(Double.parseDouble(command[1]), bank.getYear());
                 } else if (command[0].equalsIgnoreCase("Deposit")) {
+                    if (command.length != 2) {
+                        System.out.println("Bad request!");
+                        continue;
+                    }
                     account.Deposit(Double.parseDouble(command[1]));
                 } else if (command[0].equalsIgnoreCase("Request")) {
                     int status = account.RequestLoan(Double.parseDouble(command[1]));
@@ -80,20 +102,34 @@ public class Main {
                 } else if (command[0].equalsIgnoreCase("Close")) {
                     whoIsActiveStatus = NOONE;
                     System.out.println("Transaction for " + account.getUsername() + " closed");
+                } else {
+                    System.out.println("Please correct you mistyping!");
                 }
             } else if (whoIsActiveStatus == EMPLOYEE) {
                 if (command[0].equalsIgnoreCase("Lookup")) {
+                    if (command.length != 2) {
+                        System.out.println("Bad request!");
+                        continue;
+                    }
                     employee.Lookup(command[1]);
                 } else if (command[0].equalsIgnoreCase("Approve")) {
                     employee.ApproveLoan();
                 } else if (command[0].equalsIgnoreCase("Change")) {
+                    if (command.length != 3) {
+                        System.out.println("Bad request!");
+                        continue;
+                    }
                     employee.ChangeInterestRate(command[1], Double.parseDouble(command[2]));
                 } else if (command[0].equalsIgnoreCase("See")) {
                     employee.SeeInternalFund();
                 } else if (command[0].equalsIgnoreCase("Close")) {
                     whoIsActiveStatus = NOONE;
                     System.out.println("Operations for " + employee.getUsername() + " closed");
+                } else {
+                    System.out.println("Please correct you mistyping!");
                 }
+            } else {
+                System.out.println("Out of scope request");
             }
         }
     }

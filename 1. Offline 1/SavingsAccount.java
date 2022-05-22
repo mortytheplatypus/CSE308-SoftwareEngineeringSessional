@@ -9,10 +9,8 @@ public class SavingsAccount extends Account {
         if (amount > 10000) {
             System.out.println("Invalid request; current balance " +
                     balance + "$, loan " + loan + "$");
-//            this.loanRequestStatus = INVALID;
             return INVALID;
         } else {
-//            this.loanRequestStatus = PENDING;
             this.loanRequestAmount = amount;
             System.out.println("Loan request successful, sent for approval");
             return PENDING;

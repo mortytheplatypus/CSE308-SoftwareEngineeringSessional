@@ -14,13 +14,20 @@ public abstract class Employee {
 
     public void Lookup(String username) {
         ArrayList<Account> accounts = bank.getAccounts();
+        boolean noUserFound = true;
 
         for (Account account : accounts) {
             if (account.getUsername().equalsIgnoreCase(username)) {
                 System.out.println(username + "'s current Balance " + account.getBalance() +
                         "$, loan" + account.getLoan() + "$");
+                noUserFound = false;
             }
         }
+
+        if (noUserFound) {
+            System.out.println("No user found by that name!");
+        }
+
     }
     public abstract void ApproveLoan();
     public abstract void ChangeInterestRate(String accountType, double newRate);

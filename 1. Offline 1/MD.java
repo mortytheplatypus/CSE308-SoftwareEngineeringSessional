@@ -17,6 +17,7 @@ public class MD extends Employee {
             if (validity) {
                 System.out.println("Loan for " + account.getUsername() + " approved");
                 bank.DecreaseInternalFund(account.getLoanRequestAmount());
+                account.IncreaseBalance(account.getLoanRequestAmount());
             } else {
                 System.out.println("Loan for " + account.getUsername() + " declined");
             }
@@ -36,6 +37,6 @@ public class MD extends Employee {
 
     @Override
     public void SeeInternalFund() {
-        System.out.println("Current internal fund" + bank.getInternalFund() + "$");
+        System.out.println("Current internal fund " + bank.getInternalFund() + "$");
     }
 }

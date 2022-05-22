@@ -15,6 +15,7 @@ public class Officer extends Employee {
             if (validity) {
                 System.out.println("Loan for " + account.getUsername() + " approved");
                 bank.DecreaseInternalFund(account.getLoanRequestAmount());
+                account.IncreaseBalance(account.getLoanRequestAmount());
             } else {
                 System.out.println("Loan for " + account.getUsername() + " declined");
             }
