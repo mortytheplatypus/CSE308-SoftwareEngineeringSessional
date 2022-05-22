@@ -1,18 +1,17 @@
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Bank {
     double interestRates[] = {0.1, 0.05, 0.15}; //have to implement setInterestRates
 
     protected ArrayList<Account> accounts;
-    protected Stack<Account> loanRequests;
+    protected ArrayList<Account> loanRequests;
     protected int year;
     protected double internalFund;
 
     Bank() {
 //        System.out.println("Bank Created; MD, S1, S2, C1, C2, C3, C4, C5 created");
         accounts = new ArrayList<>();
-        loanRequests = new Stack<>();
+        loanRequests = new ArrayList<>();
         internalFund = 1000000;
         year = 0;
     }
@@ -45,14 +44,24 @@ public class Bank {
         }
     }
 
-    String CheckIfAccountExists(String username) {
-        String string = "NO";
+    Account CheckIfAccountExists(String username) {
         for (Account account : accounts) {
-            if (account.getUsername() == username) {
-                return account.getUsername();
+            if (account.getUsername().equalsIgnoreCase(username)) {
+                return account;
             }
         }
-        return string;
+        return null;
+    }
+
+    boolean CheckIfValidLoanRequest(double amount) {
+        if (amount < internalFund) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean CheckIfLoanRequestsPending() {
+        return !loanRequests.isEmpty();
     }
 
     public void AddAccount(Account account) {
@@ -63,7 +72,4 @@ public class Bank {
         loanRequests.add(account);
     }
 
-    public void RemoveLoanRequest() {
-        loanRequests.pop();
-    }
 }

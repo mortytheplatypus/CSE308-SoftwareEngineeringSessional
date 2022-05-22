@@ -34,7 +34,34 @@ public class Main {
                     bank.AddAccount(account);
                     whoIsActiveStatus = ACCOUNT;
                 } else if (command[0].equalsIgnoreCase("Open")) {
-                    //
+                    if (command[1].equalsIgnoreCase("MD")) {
+                        System.out.print(command[1] + " active");
+                        if (bank.CheckIfLoanRequestsPending()) {
+                            System.out.print(", there are loan approvals pending");
+                        }
+                        employee = new MD(command[1], bank);
+                        whoIsActiveStatus = EMPLOYEE;
+                    } else if (command[1].equalsIgnoreCase("S1") || command[1].equalsIgnoreCase("S2")) {
+                        System.out.print(command[1] + " active");
+                        if (bank.CheckIfLoanRequestsPending()) {
+                            System.out.print(", there are loan approvals pending");
+                        }
+                        employee = new Officer(command[1], bank);
+                        whoIsActiveStatus = EMPLOYEE;
+                    } else if (command[1].equalsIgnoreCase("C1") || command[1].equalsIgnoreCase("C2") || command[1].equalsIgnoreCase("C3") || command[1].equalsIgnoreCase("C4") || command[1].equalsIgnoreCase("C5")) {
+                        System.out.print(command[1] + " active");
+                        employee = new Cashier(command[1], bank);
+                        whoIsActiveStatus = EMPLOYEE;
+                    } else {
+                        account = bank.CheckIfAccountExists(command[1]);
+                        if (account == null) {
+                            System.out.println("Invalid request");
+                            continue;
+                        }
+                        whoIsActiveStatus = ACCOUNT;
+                        System.out.print("Welcome back, " + account.getUsername());
+                    }
+                    System.out.println();
                 } else if (command[0].equalsIgnoreCase("INC")) {
                     bank.IncreaseYear();
                 }
@@ -46,10 +73,13 @@ public class Main {
                 } else if (command[0].equalsIgnoreCase("Deposit")) {
                     account.Deposit(Double.parseDouble(command[1]));
                 } else if (command[0].equalsIgnoreCase("Request")) {
-                    account.RequestLoan(Double.parseDouble(command[1]));
+                    int status = account.RequestLoan(Double.parseDouble(command[1]));
+                    if (status == 102) {
+                        bank.AddLoanRequest(account);
+                    }
                 } else if (command[0].equalsIgnoreCase("Close")) {
                     whoIsActiveStatus = NOONE;
-                    account.MakeInactive();
+                    System.out.println("Transaction for " + account.getUsername() + " closed");
                 }
             } else if (whoIsActiveStatus == EMPLOYEE) {
                 if (command[0].equalsIgnoreCase("Lookup")) {
@@ -62,7 +92,7 @@ public class Main {
                     employee.SeeInternalFund();
                 } else if (command[0].equalsIgnoreCase("Close")) {
                     whoIsActiveStatus = NOONE;
-                    employee.MakeInactive();
+                    System.out.println("Operations for " + employee.getUsername() + " closed");
                 }
             }
         }

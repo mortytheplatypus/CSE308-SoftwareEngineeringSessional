@@ -5,15 +5,17 @@ public class LoanAccount extends Account {
 
 
     @Override
-    public void RequestLoan(double amount) {
+    public int RequestLoan(double amount) {
         if (amount > (loan*0.05)) {
             System.out.println("Invalid request; current balance " +
                     balance + "$, loan " + loan + "$");
-            this.loanRequestStatus = INVALID;
+//            this.loanRequestStatus = INVALID;
+            return INVALID;
         } else {
-            this.loanRequestStatus = PENDING;
+//            this.loanRequestStatus = PENDING;
             this.loanRequestAmount = amount;
             System.out.println("Loan request successful, sent for approval");
+            return PENDING;
         }
     }
 

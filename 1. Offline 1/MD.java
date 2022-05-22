@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MD extends Employee {
 
@@ -8,15 +9,15 @@ public class MD extends Employee {
 
     @Override
     public void ApproveLoan() {
-        ArrayList<Account> accounts = bank.getAccounts();
+        ArrayList<Account> loanRequests = bank.loanRequests;
 
-        for (Account account : accounts) {
-            if (account.getLoanRequestStatus() == PENDING) {
+        for (Account account : loanRequests) {
+            boolean validity = bank.CheckIfValidLoanRequest(account.getLoanRequestAmount());
+
+            if (validity) {
                 System.out.println("Loan for " + account.getUsername() + " approved");
                 bank.DecreaseInternalFund(account.getLoanRequestAmount());
-                account.setLoanRequestStatus(NOTREQUESTED);
-                account.setLoanRequestAmount(0);
-            } else if (account.getLoanRequestStatus() == INVALID) {
+            } else {
                 System.out.println("Loan for " + account.getUsername() + " declined");
             }
         }

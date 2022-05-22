@@ -7,18 +7,31 @@ public class Officer extends Employee {
 
     @Override
     public void ApproveLoan() {
-        ArrayList<Account> accounts = bank.getAccounts();
+        ArrayList<Account> loanRequests = bank.loanRequests;
 
-        for (Account account : accounts) {
-            if (account.getLoanRequestStatus() == PENDING) {
+        for (Account account : loanRequests) {
+            boolean validity = bank.CheckIfValidLoanRequest(account.getLoanRequestAmount());
+
+            if (validity) {
                 System.out.println("Loan for " + account.getUsername() + " approved");
                 bank.DecreaseInternalFund(account.getLoanRequestAmount());
-                account.setLoanRequestStatus(NOTREQUESTED);
-                account.setLoanRequestAmount(0);
-            } else if (account.getLoanRequestStatus() == INVALID) {
+            } else {
                 System.out.println("Loan for " + account.getUsername() + " declined");
             }
         }
+
+//        ArrayList<Account> accounts = bank.getAccounts();
+//
+//        for (Account account : accounts) {
+//            if (account.getLoanRequestStatus() == PENDING) {
+//                System.out.println("Loan for " + account.getUsername() + " approved");
+//                bank.DecreaseInternalFund(account.getLoanRequestAmount());
+//                account.setLoanRequestStatus(NOTREQUESTED);
+//                account.setLoanRequestAmount(0);
+//            } else if (account.getLoanRequestStatus() == INVALID) {
+//                System.out.println("Loan for " + account.getUsername() + " declined");
+//            }
+//        }
     }
 
     @Override
