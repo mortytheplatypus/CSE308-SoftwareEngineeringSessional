@@ -20,19 +20,6 @@ public class Officer extends Employee {
                 System.out.println("Loan for " + account.getUsername() + " declined");
             }
         }
-
-//        ArrayList<Account> accounts = bank.getAccounts();
-//
-//        for (Account account : accounts) {
-//            if (account.getLoanRequestStatus() == PENDING) {
-//                System.out.println("Loan for " + account.getUsername() + " approved");
-//                bank.DecreaseInternalFund(account.getLoanRequestAmount());
-//                account.setLoanRequestStatus(NOTREQUESTED);
-//                account.setLoanRequestAmount(0);
-//            } else if (account.getLoanRequestStatus() == INVALID) {
-//                System.out.println("Loan for " + account.getUsername() + " declined");
-//            }
-//        }
     }
 
     @Override
