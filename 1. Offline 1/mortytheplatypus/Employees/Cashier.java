@@ -1,5 +1,9 @@
+package mortytheplatypus.Employees;
+
+import mortytheplatypus.Bank;
+
 public class Cashier extends Employee {
-    Cashier(String username, Bank bank) {
+    public Cashier(String username, Bank bank) {
         super(username, "Cashier", bank);
     }
 

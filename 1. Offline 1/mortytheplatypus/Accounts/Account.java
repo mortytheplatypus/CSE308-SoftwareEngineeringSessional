@@ -1,8 +1,9 @@
+package mortytheplatypus.Accounts;
+
 public abstract class Account {
     protected static final int INVALID = 400;
     protected static final int PENDING = 102;
 
-    //define member variables
     protected double balance, loan;
     protected String username, type;
     protected double loanRequestAmount;

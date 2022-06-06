@@ -1,9 +1,14 @@
+package mortytheplatypus.Employees;
+
+import mortytheplatypus.Accounts.Account;
+import mortytheplatypus.Bank;
+
 import java.util.ArrayList;
 
 public abstract class Employee {
     //member variables
-    protected String username;
-    protected String type;
+    private String username;
+    private String type;
     protected Bank bank;
 
     Employee(String username, String type, Bank bank) {
@@ -32,7 +37,6 @@ public abstract class Employee {
     public abstract void ApproveLoan();
     public abstract void ChangeInterestRate(String accountType, double newRate);
     public abstract void SeeInternalFund();
-
 
     public String getUsername() {
         return username;

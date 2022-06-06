@@ -1,6 +1,7 @@
-public class SavingsAccount extends Account {
+package mortytheplatypus.Accounts;
 
-    SavingsAccount(String username, String type, double amount) {
+public class SavingsAccount extends Account {
+    public SavingsAccount(String username, String type, double amount) {
         super(username, "Savings", amount);
     }
 

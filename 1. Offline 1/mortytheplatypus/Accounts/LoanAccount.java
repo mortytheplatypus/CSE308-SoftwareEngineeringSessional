@@ -1,8 +1,9 @@
+package mortytheplatypus.Accounts;
+
 public class LoanAccount extends Account {
-    LoanAccount(String username, String type, double amount) {
+    public LoanAccount(String username, String type, double amount) {
         super(username, "Loan", amount);
     }
-
 
     @Override
     public int RequestLoan(double amount) {

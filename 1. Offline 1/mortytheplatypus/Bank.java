@@ -1,18 +1,21 @@
+package mortytheplatypus;
+
+import mortytheplatypus.Accounts.Account;
+
 import java.util.ArrayList;
 
 public class Bank {
-    double interestRates[] = {0.1, 0.05, 0.15}; //have to implement setInterestRates
+    private double[] interestRates = {0.1, 0.05, 0.15};
 
-    protected ArrayList<Account> accounts;
-    protected ArrayList<Account> loanRequests;
-    protected int year;
-    protected double internalFund;
+    private ArrayList<Account> accounts;
+    private ArrayList<Account> loanRequests;
+    private int year;
+    private double internalFund;
 
     Bank() {
-//        System.out.println("Bank Created; MD, S1, S2, C1, C2, C3, C4, C5 created");
         accounts = new ArrayList<>();
         loanRequests = new ArrayList<>();
-        internalFund = 1000000;
+        internalFund = 1000000.0;
         year = 0;
     }
 
@@ -38,8 +41,13 @@ public class Bank {
 
         //decrease loans
         for (Account account : accounts) {
+            int typeIndex = account.getTypeIndex();
             account.DecreaseLoan(account.getLoan()*0.1);
-            account.IncreaseBalance(account.getBalance()*interestRates[account.getTypeIndex()]);
+            if (typeIndex == 3) {
+                account.DecreaseBalance(500 < account.getBalance() ? 500 : account.getBalance());
+                continue;
+            }
+            account.IncreaseBalance(account.getBalance()*interestRates[typeIndex]);
             account.DecreaseBalance(500 < account.getBalance() ? 500 : account.getBalance());
         }
     }
@@ -53,11 +61,15 @@ public class Bank {
         return null;
     }
 
-    boolean CheckIfValidLoanRequest(double amount) {
+    public boolean CheckIfValidLoanRequest(double amount) {
         if (amount < internalFund) {
             return true;
         }
         return false;
+    }
+
+    public ArrayList<Account> getLoanRequests() {
+        return loanRequests;
     }
 
     boolean CheckIfLoanRequestsPending() {
@@ -70,6 +82,10 @@ public class Bank {
 
     public void AddLoanRequest(Account account) {
         loanRequests.add(account);
+    }
+
+    public void ChangeInterestRates(int index, double newRate) {
+        this.interestRates[index] = newRate;
     }
 
 }

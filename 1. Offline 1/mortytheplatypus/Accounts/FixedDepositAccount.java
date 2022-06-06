@@ -1,11 +1,13 @@
-public class StudentAccount extends Account {
+package mortytheplatypus.Accounts;
 
-    StudentAccount(String username, String type, double amount) {
-        super(username, "Student", amount);
+public class FixedDepositAccount extends Account {
+    public FixedDepositAccount(String username, String type, double amount) {
+        super(username, "Fixed deposit", amount);
     }
+
     @Override
     public int RequestLoan(double amount) {
-        if (amount > 1000) {
+        if (amount > 100000) {
             System.out.println("Invalid request; current balance " +
                     balance + "$, loan " + loan + "$");
             return INVALID;
@@ -18,8 +20,7 @@ public class StudentAccount extends Account {
 
     @Override
     public void Withdraw(double amount, int year) {
-        //cannot withdraw more than 10000 in one transaction
-        if (balance < amount || amount > 10000) {
+        if (year < 1) {
             System.out.println("Invalid request; current balance " +
                     balance + "$, loan " + loan + "$");
         } else {
@@ -31,6 +32,12 @@ public class StudentAccount extends Account {
 
     @Override
     public void Deposit(double amount) {
+        if (amount < 50000) {
+            System.out.println("Invalid request; current balance " +
+                    balance + "$, loan " + loan + "$");
+            return;
+        }
+
         this.IncreaseBalance(amount);
         System.out.println(amount + "$ deposited; current balance " +
                 balance + "$, loan " + loan + "$");

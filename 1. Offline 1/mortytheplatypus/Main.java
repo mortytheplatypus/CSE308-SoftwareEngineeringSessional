@@ -1,3 +1,8 @@
+package mortytheplatypus;
+
+import mortytheplatypus.Accounts.*;
+import mortytheplatypus.Employees.*;
+
 import java.util.Scanner;
 
 public class Main {
