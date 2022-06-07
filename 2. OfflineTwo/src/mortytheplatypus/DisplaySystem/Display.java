@@ -3,8 +3,8 @@ package mortytheplatypus.DisplaySystem;
 import mortytheplatypus.Component;
 
 public abstract class Display implements Component {
-	public static final int LCD = 2;
-	public static final int LED = 2;
+	public static final double LCD = 700.0;
+	public static final double LED = 500.0;
 	protected String classification;
 	protected double price;
 	Display(String classification, double price) {
@@ -25,6 +25,11 @@ public abstract class Display implements Component {
 	@Override
 	public double getPrice() {
 		return price;
+	}
+
+	@Override
+	public String toString() {
+		return classification + ",\t\tPrice: " + this.price + "$";
 	}
 }
 

@@ -3,7 +3,7 @@ package mortytheplatypus.Application;
 import mortytheplatypus.Component;
 
 public class Application implements Component {
-    public static final int APPLICATION = 2;
+    public static final double APPLICATION = 2250.0;
 
     @Override
     public String getType() {
@@ -18,5 +18,10 @@ public class Application implements Component {
     @Override
     public double getPrice() {
         return APPLICATION;
+    }
+
+    @Override
+    public String toString() {
+        return "RufApp build v.4.2.0,\t\tPrice: " + this.getPrice() + "$";
     }
 }

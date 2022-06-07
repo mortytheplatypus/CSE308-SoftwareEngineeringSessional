@@ -16,9 +16,9 @@ public class Utility {
             "\t\tLCD: " + LCD + "$\n" +
             "\t\tLED: " + LED + "$\n\n" +
             "\tCommunication Channel\n" +
-            "\t\tWifi: Installation Cost " + WIFI + "$ and Yearly Subscription Fee " + YEARLY_FEE_WIFI + "\n" +
-            "\t\tGSM: Installation Cost " + GSM + "$ and Yearly Subscription Fee " + YEARLY_FEE_GSM + "\n\n" +
-            "\tand Application Cost " + APPLICATION + "\n\n";
+            "\t\tWifi: Installation Cost " + WIFI + "$ and Yearly Subscription Fee " + YEARLY_FEE_WIFI + "$\n" +
+            "\t\tGSM: Installation Cost " + GSM + "$ and Yearly Subscription Fee " + YEARLY_FEE_GSM + "$\n\n" +
+            "\tand Application Cost " + APPLICATION + "$\n\n";
 
     public String displayUnitText = "For Display Unit, we offer three services\n\t" +
             "1. Deluxe: LCD panel with Raspberry\n\t" +
@@ -31,20 +31,20 @@ public class Utility {
             "2. GSM\n" +
             "Enter your choice (1 or 2): ";
 
-    public String noOfDisplayUnitsText = "Please select how many display units you require: ";
+    public String noOfDisplayUnitsText = "Enter how many display units you require: ";
 
-    public static final int RASPBERRY_PI = 1;
-    public static final int ARDUINO_MEGA = 2;
-    public static final int ATMEGA32 = 2;
+    public static final double RASPBERRY_PI = 1500.0;
+    public static final double ARDUINO_MEGA = 1060.0;
+    public static final double ATMEGA32 = 600.0;
 
-    public static final int WIFI = 2;
-    public static final int GSM = 2;
-    public static final int YEARLY_FEE_WIFI = 2;
-    public static final int YEARLY_FEE_GSM = 2;
+    public static final double WIFI = 1500.0;
+    public static final double GSM = 1800.0;
+    public static final double YEARLY_FEE_WIFI = 2000.0;
+    public static final double YEARLY_FEE_GSM = 1600.0;
 
-    public static final int LCD = 2;
-    public static final int LED = 2;
+    public static final double LCD = 700.0;
+    public static final double LED = 500.0;
 
-    public static final int APPLICATION = 3;
+    public static final double APPLICATION = 2250;
 
 }

@@ -1,11 +1,12 @@
 package mortytheplatypus.Processor;
 
 import mortytheplatypus.Component;
+import mortytheplatypus.Utility;
 
 public abstract class Processor implements Component {
-	public static final int RASPBERRY_PI = 2;
-	public static final int ARDUINO_MEGA = 2;
-	public static final int ATMEGA32 = 2;
+	public static final double RASPBERRY_PI = 1500.0;
+	public static final double ARDUINO_MEGA = 1060.0;
+	public static final double ATMEGA32 = 600;
 	protected String classification;
 	protected double price;
 
@@ -27,6 +28,11 @@ public abstract class Processor implements Component {
 	@Override
 	public double getPrice() {
 		return price;
+	}
+
+	@Override
+	public String toString() {
+		return classification + ",\t\tPrice: " + this.price + "$";
 	}
 }
 

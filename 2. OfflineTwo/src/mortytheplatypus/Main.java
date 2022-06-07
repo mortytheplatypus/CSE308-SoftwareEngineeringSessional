@@ -14,20 +14,21 @@ public class Main {
 
         Builder builder = new Builder();
         CommunicationChannel communicationChannel = null;
-        QMS qms;
+        QMS qms = null;
 
         int noOfDisplayUnits;
         int displayUnitChoice;
         int communicationChannelChoice;
-        boolean validChoice = false;
+        boolean validChoice;
 
-        System.out.println(utility.welcomeText + utility.costText + utility.displayUnitText);
-        displayUnitChoice = scanner.nextInt();
-        System.out.println(utility.communicationChannelText);
-        communicationChannelChoice = scanner.nextInt();
-        System.out.println(utility.noOfDisplayUnitsText);
+        System.out.println(utility.welcomeText + utility.costText);
+
+        System.out.print(utility.noOfDisplayUnitsText);
         noOfDisplayUnits = scanner.nextInt();
 
+        System.out.print(utility.communicationChannelText);
+        communicationChannelChoice = scanner.nextInt();
+        validChoice = false;
         while (!validChoice) {
             if (communicationChannelChoice == 1) {
                 communicationChannel = new Wifi();
@@ -40,8 +41,9 @@ public class Main {
             }
         }
 
+        System.out.print(utility.displayUnitText);
+        displayUnitChoice = scanner.nextInt();
         validChoice = false;
-
         while (!validChoice) {
             if (displayUnitChoice == 1) {
                 qms = builder.DeluxeBuilder(communicationChannel, noOfDisplayUnits);
@@ -54,10 +56,11 @@ public class Main {
                 validChoice = true;
             } else {
                 System.out.print("Invalid choice. Please enter either 1 or 2 or 3: ");
+                displayUnitChoice = scanner.nextInt();
             }
         }
 
-
+        System.out.println(qms);
 
     }
 }

@@ -21,6 +21,21 @@ public class QMS {
     }
 
     public double getPrice() {
-        return noOfDisplayUnits * (processor.getPrice() + display.getPrice()) + communicationChannel.getPrice() + application.getPrice();
+        return noOfDisplayUnits *
+                (processor.getPrice() + display.getPrice()) +
+                communicationChannel.getPrice() + communicationChannel.getYearlySubscriptionFee() +
+                application.getPrice();
+    }
+
+    @Override
+    public String toString() {
+        return "Device configurations: \n\t" +
+                "No. of Display Units: " + noOfDisplayUnits +
+                "Display Unit\n\t\t" +
+                "Processor: " + processor + "\n\t\t" +
+                "Screen: " + display + "\n\t" +
+                "Communication Channel: " + communicationChannel + "\n\t" +
+                "Application: " + application + "\n\t" + "\n\n" +
+                "Total cost: " + this.getPrice() + "$\n";
     }
 }
