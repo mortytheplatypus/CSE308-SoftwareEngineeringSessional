@@ -6,23 +6,27 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Editor editor = new Editor();
+        Editor editor = new Editor().getInstance();
         String filename, extension;
-        int choice;
+        String continueOrNot;
 
         while (true) {
-            //System.out.print("Enter the file: ");
-//            System.out.println("Choose a language (1 or 2 or 3): \n\t" +
-//                    "1. C\n\t" +
-//                    "2. C++\n\t" +
-//                    "3. Python\n\t");
-//            choice = scanner.nextInt();
+            System.out.print("Enter the file (with extension): ");
+
             filename = scanner.nextLine();
-            String[] strings = filename.split(".");
-            //extension = strings[strings.length - 1];
+            String[] strings = filename.split("\\.");
+            extension = strings[strings.length - 1];
 
-            System.out.println(strings.length);
 
+            editor.setEditor(extension);
+            System.out.println(editor);
+
+            System.out.print("Type 'Y or y' to continue and any other key to exit: ");
+            continueOrNot = scanner.nextLine();
+            if (continueOrNot.equalsIgnoreCase("y")) {
+                continue;
+            }
+            break;
         }
     }
 }

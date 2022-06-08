@@ -19,10 +19,6 @@ public class Editor {
     Font font;
     Parser parser;
 
-    public Editor() {
-        instance = null;
-    }
-
     public void setEditor(String language) {
         if (language.equalsIgnoreCase("C")) {
             instance.language = new C();
@@ -32,7 +28,7 @@ public class Editor {
             instance.language = new CPP();
             instance.font = new Monaco();
             instance.parser = new CPPParser();
-        } else if (language.equalsIgnoreCase("PYTHON")) {
+        } else if (language.equalsIgnoreCase("PY")) {
             instance.language = new Python();
             instance.font = new Consolas();
             instance.parser = new PythonParser();
@@ -40,6 +36,9 @@ public class Editor {
     }
 
     public Editor getInstance() {
+        if (instance == null) {
+            instance = new Editor();
+        }
         return instance;
     }
 
