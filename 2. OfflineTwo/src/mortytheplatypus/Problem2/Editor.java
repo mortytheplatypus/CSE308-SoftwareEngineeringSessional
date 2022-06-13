@@ -19,7 +19,7 @@ public class Editor {
     Font font;
     Parser parser;
 
-    private Editor() {
+    Editor() {
         //Do nothing
     }
 
