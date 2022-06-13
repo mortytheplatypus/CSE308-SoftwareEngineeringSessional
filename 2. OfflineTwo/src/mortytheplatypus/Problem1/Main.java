@@ -1,4 +1,3 @@
-//adding this comment just for updating commit message
 package mortytheplatypus.Problem1;
 
 import mortytheplatypus.Problem1.CommunicationChannel.CommunicationChannel;
