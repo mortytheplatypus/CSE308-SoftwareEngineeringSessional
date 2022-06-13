@@ -17,9 +17,15 @@ public class Main {
             String[] strings = filename.split("\\.");
             extension = strings[strings.length - 1];
 
+            if (extension.equalsIgnoreCase("c") ||
+                    extension.equalsIgnoreCase("cpp") ||
+                    extension.equalsIgnoreCase("py")) {
 
-            editor.setEditor(extension);
-            System.out.println(editor);
+                editor.setEditor(extension);
+                System.out.println(editor);
+            } else {
+                System.out.println("This editor is not built for ." + extension + " files");
+            }
 
             System.out.print("Type 'Y or y' to continue and any other key to exit: ");
             continueOrNot = scanner.nextLine();
