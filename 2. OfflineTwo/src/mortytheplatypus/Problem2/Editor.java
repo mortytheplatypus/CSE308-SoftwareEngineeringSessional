@@ -19,6 +19,10 @@ public class Editor {
     Font font;
     Parser parser;
 
+    private Editor() {
+        //Do nothing
+    }
+
     public void setEditor(String language) {
         if (language.equalsIgnoreCase("C")) {
             instance.language = new C();

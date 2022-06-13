@@ -75,8 +75,5 @@ public class Main {
             System.out.println("\nThank you for shopping at Maruf QMS providers.");
             break;
         }
-
-
-
     }
 }
