@@ -1,6 +1,6 @@
 package mortytheplatypus.Problem1.Processor;
 
-import mortytheplatypus.Problem1.Component;
+import mortytheplatypus.Problem1.v1.Component;
 
 public abstract class Processor implements Component {
 	public static final double RASPBERRY_PI = 1500.0;
@@ -31,7 +31,8 @@ public abstract class Processor implements Component {
 
 	@Override
 	public String toString() {
-		return classification + ",\t\t\tPrice: " + this.price + "$";
+		return "\n\tProcessor: " +
+				classification + ",\t\t\tPrice: " + this.price + "$";
 	}
 }
 

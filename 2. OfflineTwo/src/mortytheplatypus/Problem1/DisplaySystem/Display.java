@@ -1,6 +1,6 @@
 package mortytheplatypus.Problem1.DisplaySystem;
 
-import mortytheplatypus.Problem1.Component;
+import mortytheplatypus.Problem1.v1.Component;
 
 public abstract class Display implements Component {
 	public static final double LCD = 700.0;
@@ -29,7 +29,8 @@ public abstract class Display implements Component {
 
 	@Override
 	public String toString() {
-		return classification + ",\t\t\t\t\t\tPrice: " + this.price + "$";
+		return "\n\tScreen: " +
+				classification + ",\t\t\t\t\t\tPrice: " + this.price + "$";
 	}
 }
 

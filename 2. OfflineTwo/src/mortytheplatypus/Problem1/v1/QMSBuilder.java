@@ -1,4 +1,4 @@
-package mortytheplatypus.Problem1;
+package mortytheplatypus.Problem1.v1;
 
 import mortytheplatypus.Problem1.CommunicationChannel.CommunicationChannel;
 import mortytheplatypus.Problem1.DisplaySystem.LCD;

@@ -33,7 +33,7 @@ public class Utility {
 
     public String noOfDisplayUnitsText = "Enter how many display units you require: ";
 
-    public String buyMore = "Do you want to buy more? Enter 1 (for yes) or any other number (for no): ";
+    public String buyMore = "Do you want to buy more? Enter 1 (for yes) or any other key (for no): ";
     public static final double RASPBERRY_PI = 1500.0;
     public static final double ARDUINO_MEGA = 1060.0;
     public static final double ATMEGA32 = 600.0;

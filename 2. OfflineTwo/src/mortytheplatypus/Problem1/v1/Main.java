@@ -1,8 +1,9 @@
-package mortytheplatypus.Problem1;
+package mortytheplatypus.Problem1.v1;
 
 import mortytheplatypus.Problem1.CommunicationChannel.CommunicationChannel;
 import mortytheplatypus.Problem1.CommunicationChannel.GSM;
 import mortytheplatypus.Problem1.CommunicationChannel.Wifi;
+import mortytheplatypus.Problem1.Utility;
 
 import java.util.Scanner;
 

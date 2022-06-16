@@ -1,6 +1,6 @@
 package mortytheplatypus.Problem1.CommunicationChannel;
 
-import mortytheplatypus.Problem1.Component;
+import mortytheplatypus.Problem1.v1.Component;
 
 public abstract class CommunicationChannel implements Component {
 	public static final double WIFI = 1500.0;
@@ -11,7 +11,7 @@ public abstract class CommunicationChannel implements Component {
 	protected double price;
 	protected double yearlySubscriptionFee;
 
-	CommunicationChannel(String classification, double price, double yearlySubscriptionFee) {
+	public CommunicationChannel(String classification, double price, double yearlySubscriptionFee) {
 		this.classification = classification;
 		this.price = price;
 		this.yearlySubscriptionFee = yearlySubscriptionFee;
@@ -38,7 +38,7 @@ public abstract class CommunicationChannel implements Component {
 
 	@Override
 	public String toString() {
-		return classification + ",\t\t\tPrice: " + this.price + "$,\t\t" +
+		return "\n\tCommunication Channel: " + classification + ",\t\t\tPrice: " + this.price + "$,\t\t" +
 				"Yearly Subscription Fee: " + this.yearlySubscriptionFee + "$";
 	}
 }
