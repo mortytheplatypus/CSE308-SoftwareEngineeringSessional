@@ -2,28 +2,33 @@ package mortytheplatypus.ProblemA;
 
 import java.io.*;
 
-public class Adapter extends Summer {
-
-    private static final String newPathname = "" +
+public class Adapter implements IAdapter {
+    public static final String PATHNAME = "" +
             "F:\\Education\\BUET\\Academic\\Level 3 Term 1" +
             "\\Sessional\\CSE308\\3. OfflineThree\\src" +
-            "\\mortytheplatypus\\ProblemA\\IntegerInput.txt";
+            "\\mortytheplatypus\\ProblemA\\IntermediateInput.txt";
+    private String regex;
 
-    public Adapter(String pathname) throws IOException {
-        super(pathname);
-        CreateNewFile();
+    public Adapter(String pathname, String regex) throws IOException {
+        this.regex = regex;
+        this.CreateNewFile(pathname);
     }
 
-    private void CreateNewFile() throws IOException {
-        File originalFile = new File(this.pathname);
+    @Override
+    public double calculateSum() throws IOException {
+        return new Summer(PATHNAME).calculateSum();
+    }
 
-        File newFile = new File(newPathname);
+    private void CreateNewFile(String pathname) throws IOException {
+        File originalFile = new File(pathname);
+
+        File newFile = new File(PATHNAME);
         newFile.createNewFile();
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(originalFile));
-        String numbers[] = bufferedReader.readLine().split("~");
+        String numbers[] = bufferedReader.readLine().split(regex);
 
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newPathname));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATHNAME));
 
         for (String number : numbers) {
             bufferedWriter.write(number);
@@ -32,7 +37,5 @@ public class Adapter extends Summer {
 
         bufferedReader.close();
         bufferedWriter.close();
-
-        this.pathname = newPathname;
     }
 }
