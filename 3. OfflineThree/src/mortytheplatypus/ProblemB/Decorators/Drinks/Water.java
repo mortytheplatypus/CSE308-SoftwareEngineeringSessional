@@ -25,7 +25,7 @@ public class Water extends AppetizerDecorator {
 
     @Override
     public double getPrice() {
-        return 20.0 + this.getPrice();
+        return 20.0 + this.burger.getPrice();
     }
 
     @Override

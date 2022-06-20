@@ -24,7 +24,7 @@ public class FrenchFries extends AppetizerDecorator {
 
     @Override
     public double getPrice() {
-        return 150.0 + this.getPrice();
+        return 150.0 + this.burger.getPrice();
     }
 
     @Override

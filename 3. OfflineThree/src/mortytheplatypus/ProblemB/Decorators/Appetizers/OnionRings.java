@@ -24,7 +24,7 @@ public class OnionRings extends AppetizerDecorator {
 
     @Override
     public double getPrice() {
-        return 120.0 + this.getPrice();
+        return 120.0 + this.burger.getPrice();
     }
 
     @Override

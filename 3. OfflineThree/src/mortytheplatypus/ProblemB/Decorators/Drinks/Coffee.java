@@ -25,7 +25,7 @@ public class Coffee extends AppetizerDecorator {
 
     @Override
     public double getPrice() {
-        return 50.0 + this.getPrice();
+        return 50.0 + this.burger.getPrice();
     }
 
     @Override

@@ -3,15 +3,21 @@ package mortytheplatypus.ProblemB;
 import mortytheplatypus.ProblemB.Burger.Beef;
 import mortytheplatypus.ProblemB.Burger.IBurger;
 import mortytheplatypus.ProblemB.Burger.Veggi;
+import mortytheplatypus.ProblemB.Decorators.Appetizers.AppetizerDecorator;
 import mortytheplatypus.ProblemB.Decorators.Appetizers.FrenchFries;
 import mortytheplatypus.ProblemB.Decorators.Appetizers.OnionRings;
 import mortytheplatypus.ProblemB.Decorators.Cheese.Cheese;
 import mortytheplatypus.ProblemB.Decorators.Drinks.Coffee;
 import mortytheplatypus.ProblemB.Decorators.Drinks.Coke;
+import mortytheplatypus.ProblemB.Decorators.Drinks.DrinksDecorator;
 import mortytheplatypus.ProblemB.Decorators.Drinks.Water;
 
 public class ComboMeal {
-    IBurger burger = null;
+    private IBurger burger;
+
+    public ComboMeal() {
+        burger = null;
+    }
 
     public IBurger BeefWithCheeseAndFrenchFries() {
         burger = new Beef();

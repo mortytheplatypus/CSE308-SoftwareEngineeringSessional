@@ -45,7 +45,8 @@ public class Main {
                 }
             }
 
-            System.out.println("\n\tMeal Description\n" + burger.getDescription() + "\n");
+            System.out.println("\n\tMeal Description\n" + burger.getDescription() + "\n" +
+                    "\tPrice:\t" + burger.getPrice() + "tk\n");
 
             //check if the buyer wants to buy more
             System.out.print(utility.buyMoreText);

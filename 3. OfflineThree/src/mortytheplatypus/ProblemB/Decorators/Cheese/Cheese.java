@@ -24,7 +24,7 @@ public class Cheese extends CheeseDecorator {
 
     @Override
     public double getPrice() {
-        return 80.0 + this.getPrice();
+        return 80.0 + this.burger.getPrice();
     }
 
     @Override
