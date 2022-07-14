@@ -12,19 +12,19 @@ public class GradeCalculator {
             return "Error: Non-number Input";
         }
 
-        int adjustedMarks = (int) Math.ceil(marks);
-
         // upper bound
-        if (adjustedMarks > 400) {
+        if (marks > 400.0) {
             System.out.println("Error in Input: Input must be less than 400.");
             return "Error: Marks greater than 400";
         }
 
         // lower bound
-        if (adjustedMarks < 0) {
+        if (marks < 0.0) {
             System.out.println("Error in Input: Input must be greater than 0.");
             return "Error: Marks less than 0";
         }
+
+        int adjustedMarks = (int) Math.ceil(marks);
 
         if (credit == 3) {
             if (adjustedMarks >= 240) {
