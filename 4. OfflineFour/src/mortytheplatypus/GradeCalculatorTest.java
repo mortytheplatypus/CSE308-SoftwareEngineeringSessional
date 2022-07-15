@@ -24,7 +24,7 @@ class GradeCalculatorTest {
     void ThreeCreditLessThan0() {
         assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(3, "-725"));
         assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(3, "-1.03"));
-        assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(3, "-2.48"));
+        assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(3, "-0.048"));
     }
 
     @Test
@@ -118,7 +118,7 @@ class GradeCalculatorTest {
     void FourCreditLessThan0() {
         assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(4, "-725"));
         assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(4, "-1.03"));
-        assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(4, "-2.48"));
+        assertEquals("Error: Marks less than 0", gradeCalculator.calculateGrade(4, "-0.0608"));
     }
 
     @Test
